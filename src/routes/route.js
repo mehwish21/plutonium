@@ -6,7 +6,11 @@ const BookController= require("../controllers/bookController")
 const commonMW = require ("../middlewares/commonMiddlewares")
 
 router.get("/test-me", function (req, res) {
-    res.send("My first ever api!")
+     const moment = require('moment');
+     let now = moment();
+    const  m = req.originalUrl
+    const ipAddress = req.ip
+    console.log(ipAddress, "" ,now.format(), "", m)
 })
 
 
