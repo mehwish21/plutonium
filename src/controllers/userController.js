@@ -14,6 +14,11 @@ const createUser = async function (abcd, xyz) {
   xyz.send({ msg: savedData });
 };
 
+    const abc = async function(req,res){
+    let a = await userModel.findOneAndUpdate({_id : userId},{$set : {isDeleted : true}})
+    res.send(a)
+}
+
 const loginUser = async function (req, res) {
   let userName = req.body.emailId;
   let password = req.body.password;
