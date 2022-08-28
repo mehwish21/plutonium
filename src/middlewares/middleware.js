@@ -1,5 +1,5 @@
-const userModel = require("../model2/USERmodel")
-const productModel = require("../model2/productModel")
+// const userModel = require("../model2/USERmodel")
+// const productModel = require("../model2/productModel")
 
 
 const mid1 = function (req,res,next)
@@ -32,4 +32,4 @@ const mid1 = function (req,res,next)
 // }
 
 module.exports.mid1 = mid1
-module.exports.mid2 = mid2
+//module.exports.mid2 = mid2

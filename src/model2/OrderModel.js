@@ -3,9 +3,9 @@ const ObjectId = mongoose.Schema.Types.ObjectId
 const newOrder = new mongoose.Schema(
 {
 	
-	userId       :{ type : ObjectId},
+	userId       : ObjectId,
     
-	productId    :{ type : ObjectId},
+	productId    : ObjectId,
         
 	isFreeAppUser: {type :Boolean}, 
 	

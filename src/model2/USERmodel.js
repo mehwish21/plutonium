@@ -13,7 +13,7 @@ const newUser = new mongoose.Schema({
  gender      : {type : String ,
  enum        : ['male', 'female', 'other']},            // Allowed values are - “male”, “female”, “other”
  
-isFreeAppUser: {type : Boolean}                  // Default false value.
+isFreeAppUser:  Boolean                                // Default false value.
 
 },
 {timestamps  : true})

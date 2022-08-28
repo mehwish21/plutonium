@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const contro = require("../controllers2/userController")
+const orderController = require("../controllers2/orderController")
+
 const middle = require("../middlewares/middleware")
 const newProduct = require('../controllers2/productcontroller')
 
 router.post('/createUser',middle.mid1,contro.createUser)
 router.post('/createProduct', newProduct.createProduct)
+router.post('/createOrder',middle.mid1,orderController.createOrder)
 
 
 
