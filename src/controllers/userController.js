@@ -14,7 +14,8 @@ const createUser = async function (abcd, xyz) {
   xyz.send({ msg: savedData });
 };
 
-    const abc = async function(req,res){
+    const remove = async function(req,res){
+    let userId = req.params.userId
     let a = await userModel.findOneAndUpdate({_id : userId},{$set : {isDeleted : true}})
     res.send(a)
 }
@@ -101,3 +102,4 @@ module.exports.createUser = createUser;
 module.exports.getUserData = getUserData;
 module.exports.updateUser = updateUser;
 module.exports.loginUser = loginUser;
+module.exports.remove = remove;
