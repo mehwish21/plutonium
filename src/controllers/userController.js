@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const userModel = require("../models/userModel");
+const userModel = require("../models/userModel1");
 
 /*
   Read all the comments multiple times to understand why we are doing what we are doing in login api and getUserData api
@@ -51,7 +51,7 @@ const loginUser = async function (req, res) {
 
 const getUserData = async function (req, res) {
   let token = req.headers["x-Auth-token"];
-  if (!token) token = req.headers["x-auth-token"];
+  //if (!token) token = req.headers["x-auth-token"];
 
   //If no token is present in the request header return error. This means the user is not logged in.
   if (!token) return res.send({ status: false, msg: "token must be present" });
