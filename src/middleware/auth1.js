@@ -1,27 +1,35 @@
 const jwt = require("jsonwebtoken");
 
-const mid = function(req,res,next)
+const authenticate = function(req,res,next)
 {
-    let rename = req.headers["x-auth-token"]
-    if(!rename){
+    let token = req.headers["x-auth-token"]
+    if(!token){
         res.send({msg : "token must be present"})
     }
+    
+    let decodedToken = jwt.verify(token, "functionup-plutonium-very-very-secret-key");
+    console.log(decodedToken)
+    if (!decodedToken)
+    {
+    return res.send({ status: false, msg: "token is invalid" });
+    }
+    else {
     next()
-
+    }
 }
-
 
 let authorise = function(req ,res, next)
     {
-    let user = req.params.userId 
-    let token= req.headers["x-auth-token"]
-    if(user != token)
-    {
-        res.send({"msg" : "user is not auhtorised"})
-        next()
+        let token=req.headers["x-auth-token"]
+        let decodedToken=jwt.verify(token,"functionup-plutonium-very-very-secret-key")
+        console.log(decodedToken)
+        let abc =decodedToken.userId
+        let xyz =req.params.userId
+        if(abc!=xyz){res.status(403).send({error:"user logged in is not allowed"})
+        }else{next()}
     }
-   }
+   
 
-module.exports.mid = mid
+module.exports.authenticate = authenticate
 module.exports.authorise = authorise
 
