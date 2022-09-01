@@ -1,24 +1,19 @@
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel1");
 
-/*
-  Read all the comments multiple times to understand why we are doing what we are doing in login api and getUserData api
-*/
-const createUser = async function (abcd, xyz) {
-  //You can name the req, res objects anything.
-  //but the first parameter is always the request 
-  //the second parameter is always the response
+
+// create user
+
+  const createUser = async function (abcd, xyz)   
+{
   let data = abcd.body;
   let savedData = await userModel.create(data);
   console.log(abcd.newAtribute);
   xyz.send({ msg: savedData });
-};
-
-    const remove = async function(req,res){
-    let userId = req.params.userId
-    let a = await userModel.findOneAndUpdate({_id : userId},{$set : {isDeleted : true}})
-    res.send(a)
 }
+
+// --------------------------------------------------x-----------------------------------------------------------------------
+// login user
 
 const loginUser = async function (req, res) {
   let userName = req.body.emailId;
@@ -37,6 +32,10 @@ const loginUser = async function (req, res) {
   // The decision about what data to put in token depends on the business requirement
   // Input 2 is the secret (This is basically a fixed value only set at the server. This value should be hard to guess)
   // The same secret will be used to decode tokens 
+
+// --------------------------------------------------x-----------------------------------------------------------------------
+// create token
+
   let token = jwt.sign(
     {
       userId: user._id.toString(),
@@ -49,13 +48,14 @@ const loginUser = async function (req, res) {
   res.send({ status: true, token: token });
 };
 
-const getUserData = async function (req, res) {
+// --------------------------------------------------x-----------------------------------------------------------------------
+// get user data
+
+  const getUserData = async function (req, res) {
   let token = req.headers["x-auth-token"];
   //if (!token) token = req.headers["x-auth-token"];
-
   //If no token is present in the request header return error. This means the user is not logged in.
   if (!token) return res.send({ status: false, msg: "token must be present" });
-
   console.log(token);
 
   // If a token is present then decode the token with verify function
@@ -80,6 +80,9 @@ const getUserData = async function (req, res) {
   // Note: Try to see what happens if we change the secret while decoding the token
 };
 
+// --------------------------------------------------x-----------------------------------------------------------------------
+// update user
+
 const updateUser = async function (req, res) {
   // Do the same steps here:
   // Check if the token is present
@@ -97,6 +100,16 @@ const updateUser = async function (req, res) {
   let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData);
   res.send({ status: updatedUser, data: updatedUser });
 };
+
+// --------------------------------------------------x-----------------------------------------------------------------------
+   // delete user 
+
+   const remove = async function(req,res){
+    let userId = req.params.userId
+    let a = await userModel.findOneAndUpdate({_id : userId},{$set : {isDeleted : true}})
+    res.send(a)
+}
+
 
 module.exports.createUser = createUser;
 module.exports.getUserData = getUserData;
